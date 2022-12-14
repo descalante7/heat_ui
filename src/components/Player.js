@@ -9,7 +9,7 @@ class Player extends Component {
         this.state = {
            player: this.props.player
         }
-    }
+    }    
 
     render() {
         return (
@@ -18,8 +18,9 @@ class Player extends Component {
                 <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
                 <div className="d-grid gap-2">
                 <br />
-                <div className="row">
-                    <div className="col-md-6">{JSON.stringify(this.state.player)}</div></div>
+                <div className="container">
+                    <pre>{JSON.stringify(this.state.player, null, 2)}</pre>
+                </div>
                 </div>
                 {/* <p>
                 Edit <code>src/App.js</code> and save to reload.

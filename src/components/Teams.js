@@ -17,9 +17,9 @@ class Teams extends Component {
             playerData: [],
             leagueKey: this.props.leagueKey,
             playerMove: false,
-            player: {},
             playersMove: false,
-            teamKey: '',            
+            player: {},            
+            teamKey: '',         
             name: '',
             listPlayers: false
         }
@@ -55,7 +55,7 @@ class Teams extends Component {
     playersFlag = async (teamKey) => {
         if(teamKey) {
            this.setState({teamKey: teamKey});
-           this.setState({ move: true });
+           this.setState({ playersMove: true });
         }
     }
 
@@ -73,6 +73,9 @@ class Teams extends Component {
             if(this.state.playerMove) {
                 let path = '/player';
                 return <Navigate to={path} state={{player: this.state.player}} replace={true} />
+            }else {
+                let path = '/players';
+                return <Navigate to={path} state={{teamKey: this.state.teamKey}} replace={true} />
             }
         }else {
             return (
@@ -94,7 +97,7 @@ class Teams extends Component {
                         <br />
                         <h3>Player Search by Team</h3>
                         {this.state.teamData && this.state.teamData.map((team) =>
-                            <Button variant="danger" size="lg" key={team.teamKey} value={team.teamKey} onClick={() =>this.playersFlag('/players')}>{team.teamKey}  {team.teamName}</Button>
+                            <Button variant="danger" size="lg" key={team.teamKey} value={team.teamKey} onClick={() =>this.playersFlag(team.teamKey)}>{team.teamKey}  {team.teamName}</Button>
                         )}
                         </div>
                     </header>

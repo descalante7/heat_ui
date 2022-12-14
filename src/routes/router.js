@@ -5,10 +5,12 @@ import Home from '../components/Home';
 import Leagues from '../components/Leagues';
 import Teams from '../components/Teams';
 import Player from '../components/Player';
+import Players from '../components/Players';
 
 const Routes = () => {
     let leagueKey = '';
     let playerObj = '';
+    let teamKey = '';
     let location = useLocation();    
     if(location.pathname == '/teams') {
         console.log(location);
@@ -24,12 +26,20 @@ const Routes = () => {
         }       
     }
 
+     if(location.pathname == '/players') {
+        console.log(location);
+        if(location.state){
+            if(location.state.teamKey) teamKey = location.state.teamKey;
+        }       
+    }
+
      return (       
         <Switch>
             <Route exact path="/" element={<Home/>}/>
             <Route exact path="/leagues" element={<Leagues/>}/>
             <Route exact path="/teams" element={<Teams leagueKey={leagueKey} />} />
             <Route exact path="/player" element={<Player player={playerObj} />} />
+            <Route exact path="/players" element={<Players teamKey={teamKey} />} />
         </Switch>       
     );
 }

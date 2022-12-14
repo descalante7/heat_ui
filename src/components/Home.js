@@ -8,9 +8,9 @@ import logo from '../assets/Miami-Heat-logo.png';
 
 let Home = () => {
 
-    let navigate = useNavigate(); 
-    const routeChange = () =>{ 
-        let path = `/leagues`; 
+    let navigate = useNavigate();
+
+    const routeChange = (path) =>{        
         navigate(path);
     }
 
@@ -20,10 +20,10 @@ let Home = () => {
             <img src={logo}  alt="logo" />
             <div className="d-grid gap-2">
             <br />
-            <Button variant="danger" size="lg" onClick={routeChange}>
+            <Button variant="danger" size="lg" onClick={() => routeChange('/leagues')}>
                 League & Player Information
             </Button>
-            <Button variant="danger" size="lg">
+            <Button variant="danger" size="lg" onClick={() => routeChange('/scoutPortal')}>
                 Manage Scouting Reports
             </Button>
             </div>
