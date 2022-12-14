@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import {Link, useHistory, withRouter, useParams} from 'react-router-dom';
+import {Link, useHistory, withRouter, useParams, Navigate} from 'react-router-dom';
 
 import logo from '../assets/Miami-Heat-logo.png';
 
@@ -16,7 +16,10 @@ class Teams extends Component {
             teamData: [],
             playerData: [],
             leagueKey: this.props.leagueKey,
-            move: false,
+            playerMove: false,
+            player: {},
+            playersMove: false,
+            teamKey: '',            
             name: '',
             listPlayers: false
         }
@@ -54,39 +57,50 @@ class Teams extends Component {
            this.setState({teamKey: teamKey});
            this.setState({ move: true });
         }
-    }   
+    }
+
+    directToPlayer = (playerObj) => {
+        this.setState({player: playerObj});
+        this.setState({playerMove: true});
+    }  
 
     render() {
         let list = this.state.playerData
             .filter(d => this.state.name === '' || d.firstName.toLowerCase().includes(this.state.name.toLowerCase()));              
 
              //.map((d, index) => <li key={index}>{d}</li>);
-
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <div className="d-grid gap-2">
-                    <br />           
-                    <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
-                    <h3>Current Player Search</h3>
-                    <form>
-                        <input type="search" name="player" value={this.state.name} onChange={this.searchHandler} />                       
-                    </form>
-                    <ul>                    
-                    {this.state.listPlayers && this.state.playerData && list.map((player) => 
-                            <li>{player.firstName} {player.lastName}</li>
-                    )}
-                    </ul>
-                    
-                    <br />
-                    <h3>Player Search by Team</h3>
-                    {this.state.teamData && this.state.teamData.map((team) =>
-                        <Button variant="danger" size="lg" key={team.teamKey} value={team.teamKey} onClick={() =>this.playersFlag('/players')}>{team.teamKey}  {team.teamName}</Button>
-                    )}
-                    </div>
-                </header>
-            </div>
-        );
+        if(this.state.playerMove || this.state.playersMove) {
+            if(this.state.playerMove) {
+                let path = '/player';
+                return <Navigate to={path} state={{player: this.state.player}} replace={true} />
+            }
+        }else {
+            return (
+                <div className="App">
+                    <header className="App-header">
+                        <div className="d-grid gap-2">
+                        <br />           
+                        <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                        <h3>Current Player Search</h3>
+                        <form>
+                            <input type="search" name="player" value={this.state.name} onChange={this.searchHandler} />                     
+                        </form>
+                        <ul>                    
+                        {this.state.listPlayers && this.state.playerData && list.map((player) => 
+                                <li><Link key={player.playerKey} value={player} onClick={() => this.directToPlayer(player)}>{player.firstName} {player.lastName}</Link></li>
+                        )}
+                        </ul>
+                        
+                        <br />
+                        <h3>Player Search by Team</h3>
+                        {this.state.teamData && this.state.teamData.map((team) =>
+                            <Button variant="danger" size="lg" key={team.teamKey} value={team.teamKey} onClick={() =>this.playersFlag('/players')}>{team.teamKey}  {team.teamName}</Button>
+                        )}
+                        </div>
+                    </header>
+                </div>
+            );
+        }
     }
 }
 
