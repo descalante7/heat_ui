@@ -9,13 +9,15 @@ import Players from '../components/Players';
 import ScoutPortal from '../components/ScoutPortal';
 import CreateScout from '../components/CreateScout';
 import SelectScout from '../components/SelectScout';
+import CreateReport from '../components/CreateReport';
 
 const Routes = () => {
     let leagueKey = '';
     let playerObj = '';
     let teamKey = '';
     let scoutObj = '';
-    let location = useLocation();    
+    let location = useLocation();
+
     if(location.pathname === '/teams') {
         console.log(location);
         if(location.state){
@@ -37,7 +39,7 @@ const Routes = () => {
         }       
     }
 
-    if(location.pathname === '/selectScout') {
+    if(location.pathname === '/selectScout' || location.pathname === '/createReport') {
         console.log(location);
         if(location.state){
             if(location.state.scout) scoutObj = location.state.scout;
@@ -54,7 +56,7 @@ const Routes = () => {
             <Route exact path="/scoutPortal" element={<ScoutPortal />} />
             <Route exact path="/createScout" element={<CreateScout />} />
             <Route exact path="/selectScout" element={<SelectScout scout={scoutObj} />} />
-
+            <Route exact path="/createReport" element={<CreateReport scout={scoutObj} />} />
         </Switch>       
     );
 }
