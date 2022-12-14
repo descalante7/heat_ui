@@ -10,9 +10,25 @@ class ScoutPortal extends Component {
     constructor() {
         super();
         this.state = {
-            scouts = [];
+            scouts: [],
+            scout: {},
+            name: '',
+            createScoutFlag: false
         }
-    }   
+    }
+
+    selectScout = (scoutObj) => {
+        setState({scout: scoutObj});
+    }
+
+    setScoutFlag() => {
+        setState({createScoutFlag: true});
+    }
+
+    searchHandler = (e) => {   
+        e.preventDefault();       
+        this.setState({name: e.target.value});
+    }
 
     componentDidMount = async () => {
         axios.get(config.BaseUrl + 'scouts')
@@ -28,41 +44,46 @@ class ScoutPortal extends Component {
     render() {
         let list = this.state.scouts
             .filter(d => this.state.name === '' || d.firstName.toLowerCase().includes(this.state.name.toLowerCase())); 
-       
-        return (
-            <div className="App" style={{backgroundColor: "#ffffff"}}>
-            <header className="App-header">
-                <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
-                <div className="d-grid gap-2">
-                <br />
+        
+        if(createScoutFlag) {
+            let path = '/createScout';
+            return <Navigate to={path} />
+        }else {
+            return (
+                <div className="App" style={{backgroundColor: "#ffffff"}}>
+                <header className="App-header">
+                    <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                    <div className="d-grid gap-2">
+                    <br />
 
-                 <form>
-                    <input type="search" name="player" value={this.state.name} onChange={this.searchHandler} />                     
-                </form>
-                <ul>                    
-                {this.state.listPlayers && this.state.playerData && list.map((player) => 
-                        <li><Link key={player.playerKey} value={player} onClick={() => this.directToPlayer(player)}>{player.firstName} {player.lastName}</Link></li>
-                )}
-                </ul>
+                    <form>
+                        <input type="search" name="scout" value={this.state.name} onChange={this.searchHandler} />          
+                    </form>
+                    <ul>                    
+                    {this.state.scouts && list.map((scout) =>
+                            <li><Link key={scout.scoutKey} value={scout} onClick={() => this.selectScout(scout)}>{scout.firstName} {scout.lastName}</Link></li>
+                    )}
+                    </ul>
 
-                <Button variant="danger" size="lg" onClick={() => routeChange('/createScout')}>
-                    Create New Scout
-                </Button>
+                    <Button variant="danger" size="lg" onClick={this.setScoutFlag}>
+                        Create New Scout
+                    </Button>
+                    </div>
+                    {/* <p>
+                    Edit <code>src/App.js</code> and save to reload.
+                    </p> */}
+                    {/* <a
+                    className="App-link"
+                    href="https://reactjs.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >
+                    Learn React
+                    </a> */}
+                </header>
                 </div>
-                {/* <p>
-                Edit <code>src/App.js</code> and save to reload.
-                </p> */}
-                {/* <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                >
-                Learn React
-                </a> */}
-            </header>
-            </div>
-        );
+            );
+        }
     }
 }
 
