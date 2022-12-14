@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import {Link, useHistory, withRouter, useParams, Navigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 
 import logo from '../assets/Miami-Heat-logo.png';
 

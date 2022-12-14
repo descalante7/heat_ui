@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import {Navigate } from 'react-router-dom';
 
 import logo from '../assets/Miami-Heat-logo.png';
 
