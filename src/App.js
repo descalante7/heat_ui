@@ -1,35 +1,19 @@
-import Button from 'react-bootstrap/Button';
-import logo from './assets/Miami-Heat-logo.png';
+import React, { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+//Styles
 import './App.css';
 
-function App() {
+//History
+import history from './services/history';
+import Routes from './routes/router';
+
+function App() { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className="d-grid gap-2">
-        <br />
-          <Button variant="danger" size="lg">
-            League & Player Information
-          </Button>
-          <Button variant="danger" size="lg">
-            Manage Scouting Reports
-          </Button>
-        </div>
-        {/* <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p> */}
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-      </header>
-    </div>
-  );
+      <Router history={history}>
+        <Routes />
+      </Router>
+  ); 
 }
 
 export default App;
