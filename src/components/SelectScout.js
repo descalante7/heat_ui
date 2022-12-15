@@ -11,15 +11,15 @@ class SelectScout extends Component {
         this.state = {
            scout: this.props.scout,
            createReportFlag: false,
-           editReportFlag: false
+           viewReportsFlag: false
         }
     }
 
     toggleRouteFlag = (path) => { 
         if(path === '/createReport') {      
             this.setState({createReportFlag: true});
-        }else if(path === '/editReport') {
-            this.setState({ editReportFlag: true});
+        }else if(path === '/viewReports') {
+            this.setState({ viewReportsFlag: true});
         }
     } 
 
@@ -29,8 +29,8 @@ class SelectScout extends Component {
             return (
                 <Navigate to={path} state={{scout: this.state.scout}} />
             );
-        }else if(this.state.editReportFlag) {
-            let path = '/editReport';  
+        }else if(this.state.viewReportsFlag) {
+            let path = '/viewReports';  
             return (
                 <Navigate to={path} state={{scout: this.state.scout}} />
             );
@@ -47,7 +47,7 @@ class SelectScout extends Component {
                     <Button variant="danger" size="lg" onClick={() => this.toggleRouteFlag('/createReport')}>
                         Create New Report
                     </Button>
-                    <Button variant="danger" size="lg" onClick={() => this.toggleRouteFlag('/editReport')}>
+                    <Button variant="danger" size="lg" onClick={() => this.toggleRouteFlag('/viewReports')}>
                         Edit Existing Report
                     </Button>
                     </div>           

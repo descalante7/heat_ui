@@ -75,7 +75,7 @@ class CreateScout extends Component {
                     <p>Last Name</p>
                     <input type="text" name="lName" onChange={this.addScoutHandler} />
                     <p>Email</p>
-                    <textarea type="text" name="email" onChange={this.addScoutHandler} />
+                    <input type="text" name="email" onChange={this.addScoutHandler} />
                     <p>Phone</p>
                     <input type="text" name="phone" onChange={this.addScoutHandler} />
                     <p>Team Key</p>

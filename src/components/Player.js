@@ -21,18 +21,7 @@ class Player extends Component {
                 <div className="container">
                     <pre>{JSON.stringify(this.state.player, null, 2)}</pre>
                 </div>
-                </div>
-                {/* <p>
-                Edit <code>src/App.js</code> and save to reload.
-                </p> */}
-                {/* <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                >
-                Learn React
-                </a> */}
+                </div>               
             </header>
             </div>
         );
