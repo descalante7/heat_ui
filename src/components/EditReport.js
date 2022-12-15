@@ -11,7 +11,12 @@ class EditReport extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            report: this.props.report
+            report: this.props.report,
+            assist: this.props.report.assist,
+            defense: this.props.report.defense,
+            rebound: this.props.report.rebound,
+            shooting: this.props.report.shooting,
+            comments: this.props.report.comments
         }
     }
 
@@ -33,14 +38,12 @@ class EditReport extends Component {
         e.preventDefault();       
         let body = {
             ReportKey: Number(this.state.report.reportKey),
-            PlayerKey: Number(this.state.report.playerKey),
             TeamKey: Number(this.state.report.teamKey),
-            Defense: Number(this.state.report.defense),
-            Rebound: Number(this.state.report.rebound),
-            Shooting: Number(this.state.report.shooting),
-            Assist: Number(this.state.report.assist),
-            Comments: this.state.report.comments,
-            IsActiveFlag: true
+            Shooting: Number(this.state.shooting),
+            Assist: Number(this.state.assist),
+            Defense: Number(this.state.defense),
+            Rebound: Number(this.state.rebound),            
+            Comments: this.state.comments
         }; 
 
         //this.setState({});        
@@ -50,7 +53,8 @@ class EditReport extends Component {
             url: config.BaseUrl + 'UpdateReport?reportId=' + this.state.report.reportKey,
             headers: {'Content-Type': 'application/json'},
             data: body
-        }).then(res => {    
+        }).then(res => {
+            console.log(res.data);   
             this.setState({
                 playerKey: '',
                 defense: '',
@@ -58,7 +62,7 @@ class EditReport extends Component {
                 shooting: '',
                 assist: '',
                 comments: ''                
-            });     
+            });
             this.notifySuccess('Report entered successfully!');
         })
         .catch(err => {
@@ -75,19 +79,19 @@ class EditReport extends Component {
                     <br />
                     <h3>Edit Report</h3>
                     <p>Scout Key</p>
-                    <input type="text" name="reportKey" defaultValue={this.state.report.scoutKey} />
+                    <input type="text" name="reportKey" value={this.state.report.scoutKey} />
                     <p>Team Key</p>
                     <input type="text" name="teamKey" value={this.state.report.teamKey} onChange={this.editReportHandler} />                   
                     <p>Defense</p>
-                    <input type="text" name="defense" value={this.state.report.defense} onChange={this.editReportHandler} />
+                    <input type="text" name="defense" defaultValue={this.state.report.defense} onChange={this.editReportHandler} />
                     <p>Rebound</p>
-                    <input type="text" name="rebound" value={this.state.report.rebound} onChange={this.editReportHandler} />
+                    <input type="text" name="rebound" defaultValue={this.state.report.rebound} onChange={this.editReportHandler} />
                     <p>Shooting</p>
-                    <input type="text" name="shooting" value={this.state.report.shooting} onChange={this.editReportHandler} />
+                    <input type="text" name="shooting" defaultValue={this.state.report.shooting} onChange={this.editReportHandler} />
                     <p>Assist</p>
-                    <input type="text" name="assist" value={this.state.report.assist} onChange={this.editReportHandler} />
+                    <input type="text" name="assist" defaultValue={this.state.report.assist} onChange={this.editReportHandler} />
                     <p>Comments</p>
-                    <textarea type="text" name="comments" value={this.state.report.comments} onChange={this.editReportHandler} />
+                    <textarea type="text" name="comments" defaultValue={this.state.report.comments} onChange={this.editReportHandler} />
                     <p></p>
                     <button type="submit" className="btn btn-primary">Submit</button>
                     <Toaster />                  
