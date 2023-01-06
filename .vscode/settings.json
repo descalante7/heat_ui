@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/5559df00-7e39-4b48-af7e-1bb3f7e57599/microsoft.web/sites/subscriptions/5559df00-7e39-4b48-af7e-1bb3f7e57599/resourceGroups/descalante-dev-rg/providers/Microsoft.Web/sites/heat-ui",
+    "appService.deploySubpath": "build"
+}

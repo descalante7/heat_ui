@@ -6,7 +6,7 @@ import {Navigate} from 'react-router-dom';
 
 import logo from '../assets/Miami-Heat-logo.png';
 
-let config = process.env.CONFIG ? process.env.CONFIG : require('../config.json');
+let baseUrl = 'https://heat-server20221212094254.azurewebsites.net/api/scoutingreports/';
 
 class ViewReports extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class ViewReports extends Component {
     }
 
     componentDidMount = async () => {
-        axios.get(config.BaseUrl + 'ReportsAll?scoutId=' + this.state.scout.scoutKey)
+        axios.get(baseUrl + 'ReportsAll?scoutId=' + this.state.scout.scoutKey)
         .then(res => {
             this.setState({reports: res.data});
         }).catch(err => {
@@ -41,7 +41,7 @@ class ViewReports extends Component {
             return (
                 <div className="App" style={{backgroundColor: "#ffffff"}}>
                 <header className="App-header">
-                    <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                    <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
                     <div className="d-grid gap-2">
                     <br />
                     <h4>ScoutId: {this.state.scout.scoutKey}</h4>

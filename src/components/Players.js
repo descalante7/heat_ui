@@ -4,7 +4,7 @@ import axios from 'axios';
 import logo from '../assets/Miami-Heat-logo.png';
 
 
-let config = (process.env.CONFIG) ? require(process.env.CONFIG) : require('../config.json');
+let baseUrl = 'https://heat-server20221212094254.azurewebsites.net/api/scoutingreports/';
 
 class Players extends Component {
     constructor(props) {
@@ -16,8 +16,8 @@ class Players extends Component {
     }     
    
     componentDidMount = async () => {
-        let yr = new Date().getFullYear();
-        axios.get(config.BaseUrl + 'PlayersByTeam?seasonKey=' + yr + '&teamKey=' + this.state.teamKey)
+        let yr = new Date().getFullYear() - 1;
+        axios.get(baseUrl + 'PlayersByTeam?seasonKey=' + yr + '&teamKey=' + this.state.teamKey)
             .then(res => {
                 console.log(res);
                 this.setState({playersData: res.data});
@@ -33,7 +33,7 @@ class Players extends Component {
                 <header className="App-header">
                     <div className="d-grid gap-2">
                     <br />           
-                    <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                    <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
                     <div className="container">
                     <h4>Team Key: {this.state.teamKey}</h4>
                     {this.state.playersData && this.state.playersData.map((player) =>                        

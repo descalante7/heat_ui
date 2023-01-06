@@ -38,7 +38,7 @@ class SelectScout extends Component {
             return (
             <div className="App">
             <header className="App-header">
-                    <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                    <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
                     <div className="d-grid gap-2">
                     <br />
                     <h4>ScoutId: {this.state.scout.scoutKey}</h4>

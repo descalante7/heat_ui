@@ -5,7 +5,7 @@ import axios from 'axios';
 //import '../App.css';
 import logo from '../assets/Miami-Heat-logo.png';
 
-let config = (process.env.CONFIG) ? require(process.env.CONFIG) : require('../config.json');
+let baseUrl = 'https://heat-server20221212094254.azurewebsites.net/api/scoutingreports/';
 
 class CreateReport extends Component {
     constructor(props) {
@@ -54,8 +54,8 @@ class CreateReport extends Component {
         
         await axios({
             method: 'post',
-            url: config.BaseUrl + 'CreateReport',
-            headers: {'Content-Type': 'application/json'},
+            url: baseUrl + 'CreateReport',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*'},
             data: body
         }).then(res => {    
             this.setState({
@@ -77,14 +77,14 @@ class CreateReport extends Component {
     render() {
         return (
             <div className="App">
-            <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+            <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
             <form onSubmit={this.submitReport}>
                     <br />
                     <h3>Enter Report Information</h3>
                     <p>Scout Key</p>
-                    <input type="text" name="scoutKey" defaultValue={this.state.scout.scoutKey} />
+                    <input type="text" name="scoutKey" value={this.state.scout.scoutKey} />
                     <p>Team Key</p>
-                    <input type="text" name="teamKey" defaultValue={this.state.scout.teamKey} />
+                    <input type="text" name="teamKey" value={this.state.scout.teamKey} />
                     <p>Player Key</p>
                     <input type="text" name="playerKey" onChange={this.addReportHandler} />
                     <p>Defense</p>

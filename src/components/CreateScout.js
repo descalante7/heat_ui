@@ -5,7 +5,7 @@ import axios from 'axios';
 //import '../App.css';
 import logo from '../assets/Miami-Heat-logo.png';
 
-let config = (process.env.CONFIG) ? require(process.env.CONFIG) : require('../config.json');
+let baseUrl = 'https://heat-server20221212094254.azurewebsites.net/api/scoutingreports/';
 
 class CreateScout extends Component {
     constructor() {
@@ -51,8 +51,8 @@ class CreateScout extends Component {
         e.preventDefault();
         await axios({
             method: 'post',
-            url: config.BaseUrl + 'CreateScout',
-            headers: {'Content-Type': 'application/json'},
+            url: baseUrl + 'CreateScout',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*'},
             data: body
         }).then(res => {           
             this.notifySuccess('Scout entered successfully!');
@@ -66,7 +66,7 @@ class CreateScout extends Component {
     render() {
         return (
             <div className="App" style={{backgroundColor: "#ffffff"}}>
-            <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+            <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
             <form onSubmit={this.submitScout}>
                     <br />
                     <h3>Enter Scout Information</h3>

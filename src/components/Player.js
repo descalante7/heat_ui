@@ -15,7 +15,7 @@ class Player extends Component {
         return (
             <div className="App" style={{backgroundColor: "#ffffff"}}>
             <header className="App-header">
-                <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
                 <div className="d-grid gap-2">
                 <br />
                 <div className="container">

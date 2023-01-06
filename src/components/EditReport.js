@@ -5,7 +5,7 @@ import axios from 'axios';
 //import '../App.css';
 import logo from '../assets/Miami-Heat-logo.png';
 
-let config = (process.env.CONFIG) ? require(process.env.CONFIG) : require('../config.json');
+let baseUrl = 'https://heat-server20221212094254.azurewebsites.net/api/scoutingreports/';
 
 class EditReport extends Component {
     constructor(props) {
@@ -50,8 +50,8 @@ class EditReport extends Component {
         
         await axios({
             method: 'put',
-            url: config.BaseUrl + 'UpdateReport?reportId=' + this.state.report.reportKey,
-            headers: {'Content-Type': 'application/json'},
+            url: baseUrl + 'UpdateReport?reportId=' + this.state.report.reportKey,
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*'},
             data: body
         }).then(res => {
             console.log(res.data);   
@@ -63,7 +63,7 @@ class EditReport extends Component {
                 assist: '',
                 comments: ''                
             });
-            this.notifySuccess('Report entered successfully!');
+            this.notifySuccess('Report edited successfully!');
         })
         .catch(err => {
             console.log(err);
@@ -74,7 +74,7 @@ class EditReport extends Component {
     render() {
         return (
             <div className="App">
-            <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+            <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
             <form onSubmit={this.submitEditedReport}>
                     <br />
                     <h3>Edit Report</h3>

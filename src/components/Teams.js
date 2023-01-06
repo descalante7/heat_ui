@@ -5,8 +5,7 @@ import {Link, Navigate} from 'react-router-dom';
 
 import logo from '../assets/Miami-Heat-logo.png';
 
-
-let config = (process.env.CONFIG) ? require(process.env.CONFIG) : require('../config.json');
+let baseUrl = 'https://heat-server20221212094254.azurewebsites.net/api/scoutingreports/';
 
 class Teams extends Component {
     constructor(props) {
@@ -36,12 +35,12 @@ class Teams extends Component {
     }
    
     componentDidMount = async () => {
-        axios.get(config.BaseUrl + 'teams?leagueKey=' + this.state.leagueKey)
+        axios.get(baseUrl + 'teams?leagueKey=' + this.state.leagueKey)
         .then(res => {
             console.log(res);
             this.setState({teamData: res.data});
-            let yr = new Date().getFullYear();
-            return axios.get(config.BaseUrl + 'Players?seasonKey=' + yr)
+            let yr = new Date().getFullYear() - 1;
+            return axios.get(baseUrl + 'Players?seasonKey=' + yr)
         })
         .then(res =>{
             console.log(res);
@@ -83,7 +82,7 @@ class Teams extends Component {
                     <header className="App-header">
                         <div className="d-grid gap-2">
                         <br />           
-                        <a href="http://localhost:3000"><img src={logo}  alt="logo" /></a>
+                        <a href="https://heat-ui.azurewebsites.net/"><img src={logo}  alt="logo" /></a>
                         <h3>Current Player Search</h3>
                         <form>
                             <input type="search" name="player" value={this.state.name} onChange={this.searchHandler} />                     
